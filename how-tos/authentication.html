@@ -1,0 +1,192 @@
+<html class="js csstransforms3d">
+  <head>
+    <meta charSet="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <title>
+      GogApi.DotNet | Authentication
+    </title>
+    <link rel="icon" type="image/png" sizes="32x32" href="https://nicoviii.github.io/GogApi.DotNet/static/images/favicon.png"/>
+    <link rel="stylesheet" href="https://nicoviii.github.io/GogApi.DotNet/static/css/nucleus.css"/>
+    <link rel="stylesheet" href="https://nicoviii.github.io/GogApi.DotNet/static/css/fontawesome-all.min.css"/>
+    <link rel="stylesheet" href="https://nicoviii.github.io/GogApi.DotNet/static/css/hybrid.css"/>
+    <link rel="stylesheet" href="https://nicoviii.github.io/GogApi.DotNet/static/css/featherlight.min.css"/>
+    <link rel="stylesheet" href="https://nicoviii.github.io/GogApi.DotNet/static/css/perfect-scrollbar.min.css"/>
+    <link rel="stylesheet" href="https://nicoviii.github.io/GogApi.DotNet/static/css/auto-complete.css"/>
+    <link rel="stylesheet" href="https://nicoviii.github.io/GogApi.DotNet/static/css/atom-one-dark-reasonable.css"/>
+    <link rel="stylesheet" href="https://nicoviii.github.io/GogApi.DotNet/static/css/theme.css"/>
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.0.0/styles/atom-one-dark.min.css"/>
+    <link rel="stylesheet" href="https://nicoviii.github.io/GogApi.DotNet/static/css/theme-blue.css"/>
+    <script src="https://nicoviii.github.io/GogApi.DotNet/static/js/jquery-3.3.1.min.js"></script>
+  </head>
+  <body>
+    <nav id="sidebar">
+      <div id="header-wrapper">
+        <div id="header">
+          <h2 id="logo">
+            GogApi.DotNet
+          </h2>
+        </div>
+        <div class="searchbox">
+          <label for="search-by">
+            <i class="fas fa-search"></i>
+          </label>
+          <input data-search-input="" id="search-by" type="search" placeholder="Search..."/>
+          <span data-search-clear="">
+            <i class="fas fa-times"></i>
+          </span>
+        </div>
+        <script type="text/javascript" src="https://nicoviii.github.io/GogApi.DotNet/static/js/lunr.min.js"></script>
+        <script type="text/javascript" src="https://nicoviii.github.io/GogApi.DotNet/static/js/auto-complete.js"></script>
+        <script type="text/javascript">
+          var baseurl ='https://nicoviii.github.io/GogApi.DotNet'
+        </script>
+        <script type="text/javascript" src="https://nicoviii.github.io/GogApi.DotNet/static/js/search.js"></script>
+      </div>
+      <div class="highlightable">
+        <ul class="topics">
+          <li id="menu-explanations" class="dd-item menu-group-link">
+            <a>
+              Explanation
+            </a>
+          </li>
+          <li id="menu-howtos" class="dd-item menu-group-link menu-group-link-active">
+            <a>
+              How-To Guides
+            </a>
+          </li>
+          <li id="menu-refs" class="dd-item menu-group-link">
+            <a>
+              API References
+            </a>
+          </li>
+        </ul>
+        <ul id="submenu-explanations" class="submenu">
+          <li>
+            <a href="https://nicoviii.github.io/GogApi.DotNet/explanations/overview.html" class="padding">
+              Overview
+            </a>
+          </li>
+        </ul>
+        <ul id="submenu-howtos" class="submenu submenu-active">
+          <li>
+            <a href="https://nicoviii.github.io/GogApi.DotNet/how-tos/authentication.html" class="active-link padding">
+              Authentication
+            </a>
+          </li>
+        </ul>
+        <ul id="submenu-refs" class="submenu">
+          <li>
+            <a href="https://nicoviii.github.io/GogApi.DotNet/reference/GogApi.DotNet/index.html" class="padding">
+              GogApi.DotNet
+            </a>
+          </li>
+        </ul>
+        <section id="shortcuts">
+          <h3>
+            Shortucts
+          </h3>
+          <ul>
+            <li>
+              <a class="padding" href="https://nicoviii.github.io/GogApi.DotNet">
+                <i class="fas fa-home"></i>
+                Home
+              </a>
+            </li>
+            <li>
+              <a class="padding" href="https://github.com/NicoVIII/GogApi.DotNet">
+                <i class="fab fa-github"></i>
+                GitHub repo
+              </a>
+            </li>
+            <li>
+              <a class="padding" href="https://github.com/NicoVIII/GogApi.DotNet/blob/master/LICENSE.md">
+                <i class="far fa-file-alt"></i>
+                License
+              </a>
+            </li>
+          </ul>
+        </section>
+        <section id="footer">
+          <p>Built with <a href="https://github.com/ionide/Fornax">Fornax</a>
+        </section>
+      </div>
+    </nav>
+    <section id="body">
+      <div id="overlay"></div>
+      <div class="padding highlightable">
+        <div id="body-inner">
+          <span id="sidebar-toggle-span">
+            <a href="#" id="sidebar-toggle" data-sidebar-toggle="">
+              <i class="fas fa-bars"></i>
+               navigation
+            </a>
+          </span>
+          <h1>Authentication</h1>
+<p>You can read about the Authflow here:
+<a href="https://gogapidocs.readthedocs.io/en/latest/auth.html">https://gogapidocs.readthedocs.io/en/latest/auth.html</a></p>
+<p>In this guide I will show you how this is effectivly done with this library in F#.</p>
+<h2>Request authentication code</h2>
+<p>At first you need to request a authentication code. For that you need some kind of embedded
+browser and point the browser to an url like:<br />
+<a href="https://login.gog.com/auth?client_id=46899977096215655&amp;layout=client2&amp;redirect_uri=__REDIRECT_URI__&amp;response_type=code">https://login.gog.com/auth?client_id=46899977096215655&amp;layout=client2&amp;redirect_uri=__REDIRECT_URI__&amp;response_type=code</a></p>
+<p>I use always <code>https://embed.gog.com/on_login_success?origin=client</code> as redirect uri and therefore the link is:
+<a href="https://login.gog.com/auth?client_id=46899977096215655&amp;layout=client2&amp;redirect_uri=https%3A%2F%2Fembed.gog.com%2Fon_login_success%3Forigin%3Dclient&amp;response_type=code">https://login.gog.com/auth?client_id=46899977096215655&amp;layout=client2&amp;redirect_uri=https%3A%2F%2Fembed.gog.com%2Fon_login_success%3Forigin%3Dclient&amp;response_type=code</a></p>
+<p>You can find the documentation for that endpoint here:<br />
+<a href="https://gogapidocs.readthedocs.io/en/latest/auth.html#methods">https://gogapidocs.readthedocs.io/en/latest/auth.html#methods</a></p>
+<p>The user has to login there and is redirected to an url like this:</p>
+<pre><code>https://embed.gog.com/on_login_success?origin=client&amp;code=iUZDhNPZNpQkQEPS9OqEUfyx-iNMpJT-W_AY9Miw8lpYnmkPOzE908Xp33t4cNXRUCyULAXB3koWEDFhQUzfboRrlZiKxTddDBiw-fnutQcAxmicbjdWdPnPuyZTnMC1tEsg2jZMhoeTvDt66Q5SP8idHGvqq8Z04AwOU09vkUw
+</code></pre>
+<p>The important part here is the <code>code=..</code> parameter. In this example this is</p>
+<pre><code>iUZDhNPZNpQkQEPS9OqEUfyx-iNMpJT-W_AY9Miw8lpYnmkPOzE908Xp33t4cNXRUCyULAXB3koWEDFhQUzfboRrlZiKxTddDBiw-fnutQcAxmicbjdWdPnPuyZTnMC1tEsg2jZMhoeTvDt66Q5SP8idHGvqq8Z04AwOU09vkUw
+</code></pre>
+<p>This is the authentication code you need for the next step.</p>
+<h2>Request authentication token</h2>
+<p>For this you need the used redirect uri and authentication code from the previous step. This is used to request
+an authentication token, which is used to authenticate your API calls.</p>
+<pre><code class="language-fsharp">open GogApi.DotNet.FSharp
+
+// let redirectUri = &lt;RedirectUri&gt;
+// let authCode = &lt;AuthenticationCode&gt;
+
+let newTokenAsync = Authentication.getNewToken redirectUri authCode
+// newTokenAsync: Async&lt;Authentication&gt;
+</code></pre>
+<p>From here you can fire the call to the API in any way you see fitting.
+E.g. you could use <code>Async.RunSynchronously</code> or if you use Elmish something like
+<code>Cmd.OfAsync</code>.</p>
+<p>The <code>Authentication</code> you get from that has to be used for the other API calls.</p>
+<h2>Refresh authentication</h2>
+<p>Because the access token you get from GOG is only valid for a limited time, you
+have to regularly refresh your tokens. You can do this manually by calling
+<code>Authentication.getRefreshToken</code> or use a helper function which automatically
+refreshes the authentication when the tokens validity runs out.</p>
+<p>You can use this to autorefresh before any API call:</p>
+<pre><code class="language-fsharp">Authentication.withAutoRefresh(Games.getAvailableGamesForSearch search) authentication
+</code></pre>
+
+        </div>
+      </div>
+    </section>
+    <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
+      <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
+    </div>
+    <script src="https://nicoviii.github.io/GogApi.DotNet/static/js/clipboard.min.js"></script>
+    <script src="https://nicoviii.github.io/GogApi.DotNet/static/js/perfect-scrollbar.min.js"></script>
+    <script src="https://nicoviii.github.io/GogApi.DotNet/static/js/perfect-scrollbar.jquery.min.js"></script>
+    <script src="https://nicoviii.github.io/GogApi.DotNet/static/js/jquery.sticky.js"></script>
+    <script src="https://nicoviii.github.io/GogApi.DotNet/static/js/featherlight.min.js"></script>
+    <script src="https://nicoviii.github.io/GogApi.DotNet/static/js/modernizr.custom-3.6.0.js"></script>
+    <script src="https://nicoviii.github.io/GogApi.DotNet/static/js/learn.js"></script>
+    <script src="https://nicoviii.github.io/GogApi.DotNet/static/js/hugo-learn.js"></script>
+    <link rel="stylesheet" href="https://nicoviii.github.io/GogApi.DotNet/static/mermaid/mermaid.css"/>
+    <script src="https://nicoviii.github.io/GogApi.DotNet/static/mermaid/mermaid.js"></script>
+    <script>
+      mermaid.initialize({ startOnLoad: true });
+    </script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.0.0/highlight.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.0.0/languages/fsharp.min.js"></script>
+    <script>
+      hljs.initHighlightingOnLoad()
+    </script>
+  </body>
+</html>
